@@ -8,6 +8,7 @@ import {
   Alert
 } from "react-native";
 import { AsyncStorage } from "react-native";
+import RNAndroidLocationEnabler from 'react-native-android-location-enabler';
 
 export default class Form extends React.Component {
   state = {
@@ -51,13 +52,34 @@ export default class Form extends React.Component {
     } catch (error) {}
   };
 
+
+
+  onLocationPressed = () => {
+    
+      RNAndroidLocationEnabler.promptForEnableLocationIfNeeded({interval: 10000, fastInterval: 5000})
+      .then(data => {
+        alert(data);
+      }).catch(err => {
+        // The user has not accepted to enable the location services or something went wrong during the process
+        // "err" : { "code" : "ERR00|ERR01|ERR02", "message" : "message"}
+        // codes : 
+        //  - ERR00 : The user has clicked on Cancel button in the popup
+        //  - ERR01 : If the Settings change are unavailable
+        //  - ERR02 : If the popup has failed to open
+        alert("Error " + err.message + ", Code : " + err.code);
+      });
+    
+  }
+
+
   submitForm() {
+    //this.onLocationPressed();
+
     const { username, password } = this.state;
 
     //Now do something with username and password
     if (username !== "" && password !== "") {
-      //Alert.alert("UserName = " + username + " Password = " + password);
-      //console.log("Username-" + username + " and password is-" + password);
+
       if (username == "adminuser" && password == "12345678") {
         this.storeUser();
         this.props.navToDash();
@@ -86,7 +108,8 @@ export default class Form extends React.Component {
           placeholderTextColor="#ffffff"
           onChange={this.updateFormField("username")}
         />
-        <TextInput
+        <TextInput 
+          secureTextEntry={true}
           style={styles.inputBox}
           placeholder="Password"
           placeholderTextColor="#ffffff"
