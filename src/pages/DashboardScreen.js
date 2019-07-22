@@ -106,33 +106,33 @@ export default class Dashboard extends Component {
       navigator.geolocation.getCurrentPosition(
       //Will give you the current location
       (position) => {
-      const currentLongitude = JSON.stringify(position.coords.longitude);
-      //getting the Longitude from the location json
-      const currentLatitude = JSON.stringify(position.coords.latitude);
-      //getting the Latitude from the location json
-      that.setState({ currentLongitude:currentLongitude });
-      //Setting state Longitude to re re-render the Longitude Text
-      that.setState({ currentLatitude:currentLatitude });
-      //Setting state Latitude to re re-render the Longitude Text
-      that.setState({ isLoading: false});
+          const currentLongitude = JSON.stringify(position.coords.longitude);
+          //getting the Longitude from the location json
+          const currentLatitude = JSON.stringify(position.coords.latitude);
+          //getting the Latitude from the location json
+          that.setState({ currentLongitude:currentLongitude });
+          //Setting state Longitude to re re-render the Longitude Text
+          that.setState({ currentLatitude:currentLatitude });
+          //Setting state Latitude to re re-render the Longitude Text
+          that.setState({ isLoading: false});
       },
       (error) => console.log(error.message+" here"),
-      { enableHighAccuracy: true, timeout: 20000 }
+          { enableHighAccuracy: true, timeout: 20000 }
       );
       that.watchID = navigator.geolocation.watchPosition((position) => {
-      //Will give you the location on location change
-      console.log(position);
-      const currentLongitude = JSON.stringify(position.coords.longitude);
-      //getting the Longitude from the location json
-      const currentLatitude = JSON.stringify(position.coords.latitude);
-      //getting the Latitude from the location json
-      that.setState({ currentLongitude:currentLongitude });
-      //Setting state Longitude to re re-render the Longitude Text
-      that.setState({ currentLatitude:currentLatitude });
-      //Setting state Latitude to re re-render the Longitude Text
-      that.setState({ isLoading: false});
-      //alert(that.state.currentLatitude+"==>"+that.state.currentLongitude)
-      that.getCurrentLocation(that)
+          //Will give you the location on location change
+          console.log(position);
+          const currentLongitude = JSON.stringify(position.coords.longitude);
+          //getting the Longitude from the location json
+          const currentLatitude = JSON.stringify(position.coords.latitude);
+          //getting the Latitude from the location json
+          that.setState({ currentLongitude:currentLongitude });
+          //Setting state Longitude to re re-render the Longitude Text
+          that.setState({ currentLatitude:currentLatitude });
+          //Setting state Latitude to re re-render the Longitude Text
+          that.setState({ isLoading: false});
+          //alert(that.state.currentLatitude+"==>"+that.state.currentLongitude)
+          that.getCurrentLocation(that)
       });
   }
 
@@ -140,7 +140,7 @@ export default class Dashboard extends Component {
     //alert("in getDefaultLocation");
     console.log("in getDefaultLocation: Lat = "+this.state.latitude+" Long = "+this.state.longitude);
     return fetch(
-      "http://api.openweathermap.org/data/2.5/forecast?lat=28.5355&lon=77.3910&mode=json&appid=de32477c716ee4787d88b09b6211eafd"
+      "http://api.openweathermap.org/data/2.5/forecast?lat=28.5355&lon=77.3910&mode=json&appid=de32477c716ee4787d88b09b6211eafd&units=metric"
     )
       .then(response => response.json())
       .then(responseJson => {
@@ -162,7 +162,7 @@ export default class Dashboard extends Component {
       that.state.currentLatitude +
         "&lon=" +
         that.state.currentLongitude +
-        "&mode=json&appid=de32477c716ee4787d88b09b6211eafd"
+        "&mode=json&appid=de32477c716ee4787d88b09b6211eafd&units=metric"
     )
       .then(response => response.json())
       .then(responseJson => {

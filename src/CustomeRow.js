@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
 const CustomRow = ({ date, description, temperture }) => (
   <View style={styles.container}>
     <View style={styles.container_text}>
-      <Text style={styles.temperture}>{"Temperture : " + temperture}</Text>
+      <Text style={styles.temperture}>{"Temperture : " + temperture+"°C"}</Text>
       <Text style={styles.title}>{"Date and Time : " + date}</Text>
     </View>
   </View>
