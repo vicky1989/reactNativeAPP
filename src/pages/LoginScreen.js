@@ -15,7 +15,6 @@ export default class Login extends Component {
         <Logo />
         <Form
           navToDash={() => this.props.navigation.replace("Dashboard")}
-          num={26}
         />
       </View>
     );
