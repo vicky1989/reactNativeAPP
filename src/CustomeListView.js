@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
 
 const CustomListview = ({ itemList }) => (
   <View style={styles.container}>
-  <Text style={styles.title}>{"Title"}</Text>
     <FlatList
       data={itemList}
       renderItem={({ item }) => (
